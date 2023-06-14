@@ -2,9 +2,10 @@ import openai
 import pyttsx3
 import speech_recognition as sr
 import time
+import traceback
 
 # set key and initialize text to speech engine
-openai.api_key = "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"
+openai.api_key = "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"
 engine = pyttsx3.init()
 
 def transcribe_audio(filename):
@@ -16,7 +17,7 @@ def transcribe_audio(filename):
     except Exception as e: 
         print("Unknown error has occured", e)
 
-def response(prompt):
+def chat_response(prompt):
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
@@ -34,13 +35,13 @@ def speak_response(text):
 if __name__ =="__main__":
     mic = sr.Microphone()
     while True:
-        print("Say 'click' to start recording your command")
+        print("Say 'testing' to start recording your command")
         with mic as source:
             recognizer = sr.Recognizer()
             audio = recognizer.listen(source)
             try:
                 transcription = recognizer.recognize_google(audio)
-                if transcription.lower() == "click":
+                if transcription.lower() == "testing":
                     # recorded_audio = sr.AudioFile("")
                     filename = "input.wav"
                     print("Say your question")
@@ -56,14 +57,19 @@ if __name__ =="__main__":
                     text = transcribe_audio(filename)
                     if text:
                         print(f"You said: {text}")
-                        reply = response(text)
+                        reply = chat_response(text)
                         print(f"GPT-3 says: {reply}")
                         file_path = "C:\\Users\\canda\\Desktop\\capstone\\files\\output.jsx" 
                         with open(file_path, "w") as file:
                             file.write(reply)
                         speak_response(reply)
+            except sr.UnknownValueError:
+                print("Speech not recognized. Please try again.")
+            except sr.RequestError:
+                print("Could not request results from the speech recognition service. Please check your internet connection.")
             except Exception as e:
-                print("An error occured: {}".format(e))
+                print("An error occurred: {}".format(e))
+
 
 
 
