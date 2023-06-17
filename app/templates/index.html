@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+{% endblock %}
+
+{% block main %}
+<div class="homepage">
+    <h1>Voice Controlled Photo Editor</h1>
+    <p class="lead">Click the Microphone to send command.</p>
+    <img src="{{ url_for('static', filename='images/microphone.png') }}" alt="Microphone" id="microphone" width="60" height="60">
+    <p id="text" class="text">{{name}}</p>
+    <p id="response" class="response">{{reply}}</p>
+  </div>
+  
+{% endblock %}
+
+{% block js %} 
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock%}
