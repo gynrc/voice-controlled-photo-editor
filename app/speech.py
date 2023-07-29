@@ -1,8 +1,12 @@
 import openai
+import pyttsx3
 import speech_recognition as sr
 
 # Set OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
+
+# Initialize text-to-speech engine
+engine = pyttsx3.init()
 
 # Function to transcribe audio
 def transcribe_audio(filename):
@@ -26,6 +30,11 @@ def get_openai_response(prompt):
     )
     return response.choices[0].text.strip()
 
+# Function to speak the response
+def speak_response(text):
+    engine.say(text)
+    engine.runAndWait()
+
 # Initialize speech recognizer
 recognizer = sr.Recognizer()
 
@@ -46,6 +55,7 @@ def handle_user_input():
             print("You said:", text)
             reply = get_openai_response(text)
             print("GPT-3 says:", reply)
+            speak_response(reply)
         except sr.UnknownValueError:
             print("Speech recognition could not understand audio. Please try again.")
         except sr.RequestError as e:
@@ -59,6 +69,7 @@ def handle_user_input():
             print("Transcribed text:", text)
             reply = get_openai_response(text)
             print("GPT-3 says:", reply)
+            speak_response(reply)
         except Exception as e:
             print("An error occurred:", e)
 
