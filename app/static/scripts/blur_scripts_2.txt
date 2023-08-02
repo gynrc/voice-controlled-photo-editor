@@ -1,0 +1,64 @@
+// Check if a document is open
+if (app.documents.length > 0) {
+    // Get the active document
+    var doc = app.activeDocument;
+
+    // Prompt the user for the blur radius
+    var blurRadius = parseFloat(prompt("Enter the blur radius (in pixels):", "10"));
+
+    // Check if the user entered a valid number
+    if (!isNaN(blurRadius)) {
+        // Call the blur function
+        applyBlur(doc, blurRadius);
+    } else {
+        alert("Invalid input. Please enter a valid number.");
+    }
+} else {
+    alert("No document is open in Photoshop.");
+}
+
+// Function to apply the blur effect
+function applyBlur(doc, blurRadius) {
+    var width = doc.width.value;
+    var height = doc.height.value;
+
+    // Loop through all the pixels in the document
+    for (var y = 0; y < height; y++) {
+        for (var x = 0; x < width; x++) {
+            var color = doc.getPixel(x, y);
+            var avgColor = getAverageColor(doc, x, y, blurRadius);
+
+            // Set the new color with the average color values
+            doc.setPixel(x, y, avgColor);
+        }
+    }
+
+    // Refresh the document to see the changes
+    doc.refresh();
+}
+
+// Function to calculate the average color of surrounding pixels
+function getAverageColor(doc, x, y, blurRadius) {
+    var totalRed = 0;
+    var totalGreen = 0;
+    var totalBlue = 0;
+    var count = 0;
+
+    for (var i = x - blurRadius; i <= x + blurRadius; i++) {
+        for (var j = y - blurRadius; j <= y + blurRadius; j++) {
+            if (i >= 0 && i < doc.width.value && j >= 0 && j < doc.height.value) {
+                var pixelColor = doc.getPixel(i, j);
+                totalRed += pixelColor.rgb.red;
+                totalGreen += pixelColor.rgb.green;
+                totalBlue += pixelColor.rgb.blue;
+                count++;
+            }
+        }
+    }
+
+    var avgRed = totalRed / count;
+    var avgGreen = totalGreen / count;
+    var avgBlue = totalBlue / count;
+
+    return new RGBColor(avgRed, avgGreen, avgBlue);
+}

@@ -1,20 +1,38 @@
 {% extends "base.html" %}
 
-{% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-{% endblock %}
-
 {% block main %}
 <div class="homepage">
-    <h1>Voice Controlled Photo Editor</h1>
-    <p class="lead">Click the Microphone to send command.</p>
-    <img src="{{ url_for('static', filename='images/microphone.png') }}" alt="Microphone" id="microphone" width="60" height="60">
-    <p id="text" class="text">{{name}}</p>
-    <p id="response" class="response">{{reply}}</p>
+  <div class="left-div">
+    <h2 id="changing-text">Photo editing made easy. Just use your voice.</h2>
+    <div class="text">
+      <p class="intro">THINK SPEAK CREATE</p>
+      <p>A new way to make your designs come alive - Powered by AI</p>
+      <p>No Design Experience Required!</p>
+      <button id="start-editing-btn">START EDITING</button>
+    </div>
   </div>
-  
+  <div class="right-div">
+    <video class="video-element" src="{{ url_for('static', filename='images/video.mp4') }}" autoplay muted loop></video>
+  </div>
+</div>
 {% endblock %}
 
-{% block js %} 
-<script src="{{ url_for('static', filename='js/app.js') }}"></script>
-{% endblock%}
+{% block js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const startEditingButton = document.getElementById('start-editing-btn');
+
+    // Handle start editing button click event
+    startEditingButton.addEventListener('click', function() {
+      // Check if the user is authenticated (replace 'current_user' with your user authentication variable)
+      {% if current_user.is_authenticated %}
+        // User is authenticated, navigate to the edit page
+        window.location.href = "{{ url_for('edit') }}";
+      {% else %}
+        // User is not authenticated, navigate to the login page
+        window.location.href = "{{ url_for('login') }}";
+      {% endif %}
+    });
+  });
+</script>
+{% endblock %}

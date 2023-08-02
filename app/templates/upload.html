@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="Shortcuts">
+    <h2>Shortcuts</h2>
+    <div id="shortcutButtons" class="d-flex justify-content-between">
+      <button class="shortcut-btns" data-toggle="tooltip" data-placement="top" title="Crop allows you to trim or cut unwanted parts of an image, focusing on the desired area." disabled>Crop</button>
+      <button class="shortcut-btns" data-toggle="tooltip" data-placement="top" title="Resize lets you adjust the dimensions of an image, making it larger or smaller." disabled>Resize</button>
+      <button class="shortcut-btns" data-toggle="tooltip" data-placement="top" title="Blur is used to soften or obscure parts of the image, creating a subtle, out-of-focus effect." disabled>Blur</button>
+      <button class="shortcut-btns" data-toggle="tooltip" data-placement="top" title="Opacity controls the transparency of an image, making it more or less see-through." disabled>Opacity</button>
+      <button class="shortcut-btns" data-toggle="tooltip" data-placement="top" title="Hue changes the overall color of the image, shifting it along the color spectrum." disabled>Hue</button>
+      <button class="shortcut-btns" data-toggle="tooltip" data-placement="top" title="Saturation adjusts the intensity of colors in an image, making them more or less vibrant." disabled>Saturation</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="uploadpage">
+                <h3>Upload your Photo</h3>
+                {% include 'flash_messages.html' %}
+                <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                    {{ form.csrf_token }}
+                    <div class="form-group">
+                        <label for="photo" class="form-label">Choose Photo:</label>
+                        <div class="file-drop">
+                            {% if selected_image %}
+                                <input type="hidden" name="selected_image" value="{{ selected_image }}"> <!-- Add selected image URL as hidden input -->
+                                <img src="{{ selected_image }}" class="selected-image-preview" alt="Selected Image"> <!-- Display the selected image as a preview -->
+                            {% endif %}
+                            <input type="file" name="photo" id="photo" class="form-control-file" style="display: none;">
+                            <div class="drop-area" id="dropArea">
+                                <p>Drag and drop your photo here or click to select</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.audio.label(class="form-label", id="audio-data") }}
+                        {{ form.audio(id="audio-file", class="form-control-file") }} 
+                    </div>
+
+                    <div>
+                        <img src="{{ url_for('static', filename='images/microphone.png') }}" alt="Microphone" id="microphone" width="60" height="60">
+                        <p id="text" class="text"></p>
+                        <p id="response" class="response"></p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %} 
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    const dropArea = document.getElementById('dropArea');
+
+    // Handle drag and drop events
+    dropArea.addEventListener('dragenter', function(event) {
+        event.preventDefault();
+        dropArea.classList.add('highlight');
+    });
+
+    dropArea.addEventListener('dragover', function(event) {
+        event.preventDefault();
+        dropArea.classList.add('highlight');
+    });
+
+    dropArea.addEventListener('dragleave', function(event) {
+        event.preventDefault();
+        dropArea.classList.remove('highlight');
+    });
+
+    dropArea.addEventListener('drop', function(event) {
+        event.preventDefault();
+        dropArea.classList.remove('highlight');
+
+        const file = event.dataTransfer.files[0];
+        const inputFile = document.getElementById('photo');
+        inputFile.files = event.dataTransfer.files;
+    });
+
+    // Handle click to open file dialog
+    dropArea.addEventListener('click', function() {
+        const inputFile = document.getElementById('photo');
+        inputFile.click();
+    });
+});
+
+// Display selected image in the drop area
+// document.getElementById('photo').addEventListener('change', function(event) {
+//     const file = event.target.files[0];
+//     const dropArea = document.getElementById('dropArea');
+    
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onload = function(e) {
+//         dropArea.innerHTML = ''; // Clear the previous content
+//         const imageElement = document.createElement('img');
+//         imageElement.src = e.target.result;
+//         imageElement.classList.add('img-fluid');
+//         dropArea.appendChild(imageElement);
+//       };
+//       reader.readAsDataURL(file);
+//     } else {
+//       dropArea.innerHTML = '<p>Drag and drop your photo here or click to select</p>'; // Show default text
+//     }
+//   });
+
+document.getElementById('photo').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const dropArea = document.getElementById('dropArea');
+    
+    if (file) {
+      dropArea.innerHTML = `<p>Selected Image Path: ${file.name}</p>`;
+    } else {
+      dropArea.innerHTML = '<p>Drag and drop your photo here or click to select</p>'; // Show default text
+    }
+  });
+</script>
+{% endblock%}

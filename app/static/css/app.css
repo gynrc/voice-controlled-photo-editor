@@ -1,64 +1,468 @@
+/* General styling */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
     line-height: 1.5;
     background-color: white;
-  }
+}
 
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #040c44;
-  }
-  
-  .nav-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-container img {
-    float: left;
-    margin-right: 10px;
-    padding-right: 1100px;
-  }
-  
-  #navbarcontent {
-    float: right;
-  }
-  
-  .navbar-nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar-nav .nav-item {
-    display: inline-block;
-    margin-right: 10px;
-    
-  }
-  
-  .navbar-nav .nav-link {
-    text-decoration: none;
-    color: #e0c3ae;
-  }
+h1 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 45pt;
+}
 
-  .homepage {
-    display: block;
-    text-align: center;
-    padding: 10%;
-  }
+/* HEADER */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  font-weight: bold;
+}
 
-  .foot{
-    padding-top: 6%;
-    text-align: center;
-  }
+.nav-container {
+  display: flex;
+  align-items: center;
+}
 
-  h1{
-    color: #e0c3ae;
-    font-family: 'Caveat', cursive;
-  }
-  
+.nav-container img {
+  margin-right: 10px; /* Remove float and padding-right */
+}
 
-  
+#navbarcontent {
+  float: right; /* Remove float */
+}
+
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Display the navbar links horizontally */
+  align-items: center; /* Center the links vertically */
+}
+
+.navbar-nav .nav-item {
+  margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+  text-decoration: none;
+  color: blue;
+  font-size: 13pt;
+}
+
+.navbar-nav .nav-link:hover {
+  border-bottom: 3px solid #FFCA3A;
+}
+
+.profile-icon {
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+/* REGISTER/LOGIN pages */
+
+.left, .right {
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
+.left {
+  margin-right: 0;
+}
+
+.right {
+  padding: 20px 35px;
+  margin-left: 0;
+  background-color: white;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1px solid #bbbab8;
+  /* box-shadow: 0px 4px 10px 2px #bbbab8; */
+} 
+
+.form-label {
+  margin-top: 1rem;
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.form-control {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  border: 1px solid #ccc;
+  padding-left: 0.9rem;
+}
+
+.lr-vid {
+  height: 500px;
+  width: 500px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 1px solid #bbbab8;
+  /* box-shadow: 0px 4px 10px 2px #bbbab8; */
+}
+
+.lr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6%;
+  /* border: 1px solid black; */
+}
+
+.lr-container h3 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.lr-container p {
+  margin-top: 5%;
+}
+
+.input-group .input-group-text {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 85%;
+  margin-right: 10px;
+  margin-top: 7px;
+}
+
+.register-form, .login-form {
+  margin-top: 4%;
+}
+
+.login-intro {
+  text-align: center;
+  font-weight: lighter;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.login-heading {
+  margin-top: 4%;
+}
+
+/* INDEX/HOMEPAGE */
+
+#start-editing-btn {
+  border: 1px black;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 50px;
+  padding: 10px 20px;
+  margin: 25px 100px;
+  background-color: #FFCA3A;
+  width: 200px;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.homepage {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 5%;
+}
+
+.homepage h2 {
+  font-weight: bold;
+  font-size: 45pt;
+}
+
+.text {
+  /* font-weight: bold; */
+  margin-top: 7%;
+  font-size: 15px;
+}
+
+.intro {
+  font-size: 25px;
+}
+
+.left-div, .right-div {
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  /* border-radius: 4px; */
+}
+
+.left-div {
+  flex: 1;
+  padding-left: 5%;
+}
+
+.right-div {
+  flex: 1;
+  margin-left: 3%;
+}
+
+.video-element {
+  width: 600px;
+  height: 400px;
+}
+
+/* Profile page */
+
+#p-container {
+  background-color: #efecec;
+  padding: 3%;
+  box-shadow: 0px 4px 10px 2px #bbbab8;
+  border-radius: 5px;
+  /* width: 95%; */
+}
+
+.photo-display {
+  width: 250px;
+  height: 250px;
+}
+
+.hello-title {
+  /* border: 1px solid black; */
+  font-weight: bolder;
+  background-color: #FFCA3A;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 145px;
+  color: white;
+}
+
+.p-name {
+  font-weight: lighter;
+  /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+}
+
+.p-username {
+  background-color: #d7d3d3;
+  font-weight: bold;
+  width: 11%;
+  padding: 5px;
+  border-radius: 7px;
+  color: #9b9a9a;
+}
+
+.p-heading {
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+
+.pd-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 30pt;
+  margin: 50px 490px;
+  padding-bottom: 10px;
+}
+
+.pd-title:hover {
+  border-bottom: 4px solid #ccc;
+  cursor: pointer;
+}
+
+/* Shortcuts bar */
+
+.Shortcuts h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 45pt;
+}
+
+.Shortcuts {
+  background-color: rgb(190, 187, 187);
+  border: 1px rgb(190, 187, 187);
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  border-radius: 30px;
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+  margin-top: 5%;
+}
+
+#shortcutButtons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.shortcut-btns {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  align-items: center;
+  margin: 0 auto;
+  background-color: #e3c36b;
+  width: 140px;
+  font-size: 20px;
+  color: black;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.shortcut-btns:hover {
+  background-color: #f7ca3a;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+
+/* EDIT page */
+
+#editBtn {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 30px;
+}
+
+#editBtn:hover {
+  transform: scale(1.1);
+}
+
+.edit-title {
+  font-weight: bold;
+}
+
+.ed-lib {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.image-grid-container {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.image-grid-item {
+  margin: 0;
+  padding: 0;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.image-grid-item img {
+  width: 350px;
+  height: 300px;
+}
+
+/* LIBRARY page */
+
+/* CSS to style the librarysection div */
+.librarysection {
+  display: flex; /* Display divs side by side */
+  justify-content: center; /* Center the librarysection div */
+  gap: 20px; /* Add some spacing between the divs */
+  flex-wrap: wrap; /* Wrap divs to the next line when there's not enough space */
+  margin: 100px;
+}
+
+/* CSS to style each library item div */
+.librarysection > div {
+  flex: 1; /* Make all divs equally distribute the available space */
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 5px; /* Round the corners of the div */
+  padding: 10px; /* Add some padding inside the div */
+  text-align: center; /* Center the content inside the div */
+  cursor: pointer;
+}
+
+/* CSS to style the images */
+.librarybtn img {
+  width: 100px; /* Width of the image */
+  height: 100px; /* Height of the image */
+  margin-bottom: 10px; /* Add some spacing between the image and the h2 tag */
+}
+
+/* CSS to style the h2 tags */
+ h3 {
+  font-size: 40px; /* Font size of the h2 tags */
+  margin: 0; /* Remove any margin around the h2 tags */
+  color:#FFCA3A;
+}
+
+/* CSS for the hover effect */
+.librarysection > div:hover {
+  background-color: #f0f0f0; /* Change the background color on hover */
+  transform: scale(1.1); /* Scale the div up on hover */
+}
+
+/* UPLOAD page */
+
+.uploadpage h3 {
+  text-align: center;
+  margin-top: 5%;
+  font-weight: bold;
+}
+
+/* Styles for the drag and drop area */
+.drop-area {
+  border: 2px dashed #bbb;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.drop-area p {
+  margin: 0;
+}
+
+.drop-area.highlight {
+  background-color: #f0f0f0;
+}
+
+/* Hide the default file input appearance */
+.file-drop input[type="file"] {
+  display: none;
+}
+
+/* FOOTER */
+.foot{
+  padding-top: 6%;
+  text-align: center;
+}
+
+/* h1{
+  color: #e0c3ae;
+  font-family: 'Caveat', cursive;
+} */
+
+.logo{
+  padding-left: 50px;
+}
+
+.profile{
+  border:none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0 auto;
+  background-color: #FFCA3A;
+  width:200px;
+  font-size: 20px;
+  float:right;
+  align-items: end;
+}
+
+#lib{
+  padding-right: 550px;
+}
+
+.profile a {
+  text-decoration: none;
+  color: black;
+}
